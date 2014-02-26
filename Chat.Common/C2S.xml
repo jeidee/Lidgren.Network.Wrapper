@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Protocol name="C2S" number="1" version="100">
+  <Import name = "System" />
+  <Import name = "System.Collections.Generic" />
+  <Import name = "System.Linq" />
+  <Import name = "System.Text" />
+  <Import name = "Lidgren" />
+  <Import name = "Lidgren.Network" />
+  <Import name = "Lidgren.Message" />
+
+  <Flag name ="Fail" value="0" />
+  <Flag name ="Success" value="1" />
+ 
+  <Message name="ReqLogin" id="100">
+    <Data type="String" name="id" />
+  </Message>
+
+  
+  <Message name="ReqLogout">
+    <Data type="String" name="id" />
+  </Message>
+
+
+  <Message name="Heartbeat">
+  </Message>
+
+
+  <Message name="ReqSend">
+    <Data type="String" name="to_id" />
+    <Data type="String" name="message" />
+  </Message>
+
+  <Message name="ReqSendAll">
+    <Data type="String" name="message" />
+  </Message>
+
+</Protocol>

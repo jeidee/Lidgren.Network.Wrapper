@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Protocol name="S2C" number="1" version="100">
+  <Import name = "System" />
+  <Import name = "System.Collections.Generic" />
+  <Import name = "System.Linq" />
+  <Import name = "System.Text" />
+  <Import name = "Lidgren" />
+  <Import name = "Lidgren.Network" />
+  <Import name = "Lidgren.Message" />
+
+  <Flag name ="Fail" value="0" />
+  <Flag name ="Success" value="1" />
+ 
+  <Message name="ResLogin" id="200">
+    <Data type="Int16" name="ret" />
+    <!-- <Data type="String" name="users" array="100" /> -->
+  </Message>
+
+  <Message name="NotifyLogout">
+    <Data type="String" name="logout_id" />
+  </Message>
+
+  <Message name="NotifyLogin">
+    <Data type="String" name="new_id" />
+  </Message>
+
+  <Message name="ResSend">
+    <Data type="Int16" name="ret" />
+    <Data type="String" name="ret_message" />
+    <Data type="String" name="to_id" />
+  </Message>
+
+  <Message name="NotifySend">
+    <Data type="String" name="from_id" />
+    <Data type="String" name="message" />
+  </Message>
+
+  <Message name="ResSendAll">
+    <Data type="Int16" name="ret" />
+    <Data type="String" name="ret_message" />
+  </Message>
+
+  <Message name="NotifySendAll">
+    <Data type="String" name="from_id" />
+    <Data type="String" name="message" />
+  </Message>
+</Protocol>

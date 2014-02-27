@@ -29,12 +29,13 @@ namespace Chat
             net_client.AttachStub(s2c_stub);
             net_client.AttachProxy(c2s_proxy);
 
-            net_client.Init(app_identifier, false);
+            net_client.Init(app_identifier, false, false);
 
             heartbeat_timer = new Timer(e => {
 
                 if (is_login && net_client != null && net_client.connection != null)
                 {
+                    //Console.WriteLine("Send Heartbeat...[ThreadID:{0}]", Thread.CurrentThread.ManagedThreadId);
                     c2s_proxy.Heartbeat(net_client.connection);
                 }
 
@@ -51,6 +52,8 @@ namespace Chat
 
         void s2c_stub_OnNotifySendAll(Lidgren.Network.NetIncomingMessage im, S2C.Message.NotifySendAll data)
         {
+            Console.WriteLine("OnNotifySendAll...[ThreadID:{0}]", Thread.CurrentThread.ManagedThreadId);
+
             if (data.from_id == id)
                 return;
 
@@ -91,11 +94,14 @@ namespace Chat
 
         void s2c_stub_OnNotifyLogin(Lidgren.Network.NetIncomingMessage im, S2C.Message.NotifyLogin data)
         {
+            Console.WriteLine("OnNotifyLogin...[ThreadID:{0}]", Thread.CurrentThread.ManagedThreadId);
             Console.WriteLine("{0} entered in.", data.new_id);
         }
 
         void s2c_stub_OnResLogin(Lidgren.Network.NetIncomingMessage im, S2C.Message.ResLogin data)
         {
+            Console.WriteLine("OnResLogin...[ThreadID:{0}]", Thread.CurrentThread.ManagedThreadId);
+
             is_login = data.ret == (short)S2C.Message.Flag.kFlagSuccess ? true : false;
 
             if (is_login)
@@ -123,18 +129,26 @@ namespace Chat
 
         public void Login(string id)
         {
-            if (is_login)
-            {
-                Console.WriteLine("You are already logged in.");
-                return;
-            }            
+            Console.WriteLine("Post Login...[ThreadID:{0}]", Thread.CurrentThread.ManagedThreadId);
 
-            this.id = id;
-            List<int> ages = new List<int>();
-            if (!c2s_proxy.ReqLogin(net_client.connection, id))
+            SynchronizationContext.Current.Post(e =>
             {
-                Console.WriteLine("Request was refused. Check your connections.");
-            }
+                Console.WriteLine("Exec Login...[ThreadID:{0}]", Thread.CurrentThread.ManagedThreadId);
+
+                if (is_login)
+                {
+                    Console.WriteLine("You are already logged in.");
+                    return;
+                }
+
+                this.id = id;
+                List<int> ages = new List<int>();
+                if (!c2s_proxy.ReqLogin(net_client.connection, id))
+                {
+                    Console.WriteLine("Request was refused. Check your connections.");
+                }
+            
+            }, this);
         }
 
         public void Logout()
@@ -169,6 +183,8 @@ namespace Chat
 
         public void SendToAll(string message)
         {
+            Console.WriteLine("SendToAll...[ThreadID:{0}]", Thread.CurrentThread.ManagedThreadId);
+
             if (!is_login)
             {
                 Console.WriteLine("You should log in first.");

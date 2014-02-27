@@ -43,7 +43,7 @@ namespace Chat
             net_server.AttachStub(c2s_stub);
             net_server.AttachProxy(s2c_proxy);
 
-            net_server.Init(app_identifier, server_port, max_client, kServerTickInterval);
+            net_server.Init(app_identifier, server_port, max_client, kServerTickInterval, false);
             net_server.OnTick += new Action(net_server_OnTick);
 
             c2s_stub.OnReqLogin += new C2S.Stub.ReqLoginDelegate(c2s_stub_OnReqLogin);
@@ -55,6 +55,8 @@ namespace Chat
 
         void net_server_OnTick()
         {
+            //Console.WriteLine("OnTick...[ThreadID:{0}]", Thread.CurrentThread.ManagedThreadId);
+
             List<NetConnection> remove_list = new List<NetConnection>();
 
             foreach (var client in client_list.Values)
@@ -75,6 +77,8 @@ namespace Chat
 
         void c2s_stub_OnReqSendAll(NetIncomingMessage im, C2S.Message.ReqSendAll data)
         {
+            Console.WriteLine("OnReqSendAll...[ThreadID:{0}]", Thread.CurrentThread.ManagedThreadId);
+
             ConnectedUser user = client_list[im.SenderConnection];
             if (user == null)
             {
@@ -94,6 +98,8 @@ namespace Chat
 
         void c2s_stub_OnHeartbeat(NetIncomingMessage im, C2S.Message.Heartbeat data)
         {
+            //Console.WriteLine("OnHeartbeat...[ThreadID:{0}]", Thread.CurrentThread.ManagedThreadId);
+
             ConnectedUser user = client_list[im.SenderConnection];
             if (user == null)
             {

@@ -1,0 +1,17 @@
+D:\Projects\gdrive\1. 기술노트\네트워킹\lidgren-network-gen3-2013-05-07\Lidgren-network-gen3\Samples\Chat\Chat\obj\x86\Debug\Chat.csprojResolveAssemblyReference.cache
+D:\Projects\gdrive\1. 기술노트\네트워킹\lidgren-network-gen3-2013-05-07\Lidgren-network-gen3\Samples\Chat\Chat\obj\x86\Debug\Chat.Properties.Resources.resources
+D:\Projects\gdrive\1. 기술노트\네트워킹\lidgren-network-gen3-2013-05-07\Lidgren-network-gen3\Samples\Chat\Chat\obj\x86\Debug\Chat.csproj.GenerateResource.Cache
+D:\Projects\lidgren-network-gen3-2013-05-07\Lidgren-network-gen3\Samples\Chat2\Chat\bin\Debug\Chat.exe
+D:\Projects\lidgren-network-gen3-2013-05-07\Lidgren-network-gen3\Samples\Chat2\Chat\bin\Debug\Chat.pdb
+D:\Projects\lidgren-network-gen3-2013-05-07\Lidgren-network-gen3\Samples\Chat2\Chat\bin\Debug\Chat.Common.dll
+D:\Projects\lidgren-network-gen3-2013-05-07\Lidgren-network-gen3\Samples\Chat2\Chat\bin\Debug\Lidgren.Message.dll
+D:\Projects\lidgren-network-gen3-2013-05-07\Lidgren-network-gen3\Samples\Chat2\Chat\bin\Debug\Lidgren.Network.dll
+D:\Projects\lidgren-network-gen3-2013-05-07\Lidgren-network-gen3\Samples\Chat2\Chat\bin\Debug\Lidgren.Network.pdb
+D:\Projects\lidgren-network-gen3-2013-05-07\Lidgren-network-gen3\Samples\Chat2\Chat\bin\Debug\Lidgren.Network.xml
+D:\Projects\lidgren-network-gen3-2013-05-07\Lidgren-network-gen3\Samples\Chat2\Chat\bin\Debug\Chat.Common.pdb
+D:\Projects\lidgren-network-gen3-2013-05-07\Lidgren-network-gen3\Samples\Chat2\Chat\bin\Debug\Lidgren.Message.pdb
+D:\Projects\lidgren-network-gen3-2013-05-07\Lidgren-network-gen3\Samples\Chat2\Chat\obj\x86\Debug\Chat.csprojResolveAssemblyReference.cache
+D:\Projects\lidgren-network-gen3-2013-05-07\Lidgren-network-gen3\Samples\Chat2\Chat\obj\x86\Debug\Chat.Properties.Resources.resources
+D:\Projects\lidgren-network-gen3-2013-05-07\Lidgren-network-gen3\Samples\Chat2\Chat\obj\x86\Debug\Chat.csproj.GenerateResource.Cache
+D:\Projects\lidgren-network-gen3-2013-05-07\Lidgren-network-gen3\Samples\Chat2\Chat\obj\x86\Debug\Chat.exe
+D:\Projects\lidgren-network-gen3-2013-05-07\Lidgren-network-gen3\Samples\Chat2\Chat\obj\x86\Debug\Chat.pdb

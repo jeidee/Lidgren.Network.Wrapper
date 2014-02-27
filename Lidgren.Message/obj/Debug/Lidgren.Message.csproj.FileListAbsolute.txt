@@ -1,0 +1,16 @@
+D:\Projects\gdrive\1. 기술노트\네트워킹\lidgren-network-gen3-2013-05-07\Lidgren-network-gen3\Samples\Chat\Lidgren.Message\bin\Debug\Lidgren.Message.dll
+D:\Projects\gdrive\1. 기술노트\네트워킹\lidgren-network-gen3-2013-05-07\Lidgren-network-gen3\Samples\Chat\Lidgren.Message\bin\Debug\Lidgren.Message.pdb
+D:\Projects\gdrive\1. 기술노트\네트워킹\lidgren-network-gen3-2013-05-07\Lidgren-network-gen3\Samples\Chat\Lidgren.Message\bin\Debug\Lidgren.Network.dll
+D:\Projects\gdrive\1. 기술노트\네트워킹\lidgren-network-gen3-2013-05-07\Lidgren-network-gen3\Samples\Chat\Lidgren.Message\bin\Debug\Lidgren.Network.pdb
+D:\Projects\gdrive\1. 기술노트\네트워킹\lidgren-network-gen3-2013-05-07\Lidgren-network-gen3\Samples\Chat\Lidgren.Message\bin\Debug\Lidgren.Network.xml
+D:\Projects\gdrive\1. 기술노트\네트워킹\lidgren-network-gen3-2013-05-07\Lidgren-network-gen3\Samples\Chat\Lidgren.Message\obj\Debug\Lidgren.Message.csprojResolveAssemblyReference.cache
+D:\Projects\gdrive\1. 기술노트\네트워킹\lidgren-network-gen3-2013-05-07\Lidgren-network-gen3\Samples\Chat\Lidgren.Message\obj\Debug\Lidgren.Message.dll
+D:\Projects\gdrive\1. 기술노트\네트워킹\lidgren-network-gen3-2013-05-07\Lidgren-network-gen3\Samples\Chat\Lidgren.Message\obj\Debug\Lidgren.Message.pdb
+D:\Projects\lidgren-network-gen3-2013-05-07\Lidgren-network-gen3\Samples\Chat2\Lidgren.Message\bin\Debug\Lidgren.Message.dll
+D:\Projects\lidgren-network-gen3-2013-05-07\Lidgren-network-gen3\Samples\Chat2\Lidgren.Message\bin\Debug\Lidgren.Message.pdb
+D:\Projects\lidgren-network-gen3-2013-05-07\Lidgren-network-gen3\Samples\Chat2\Lidgren.Message\bin\Debug\Lidgren.Network.dll
+D:\Projects\lidgren-network-gen3-2013-05-07\Lidgren-network-gen3\Samples\Chat2\Lidgren.Message\bin\Debug\Lidgren.Network.pdb
+D:\Projects\lidgren-network-gen3-2013-05-07\Lidgren-network-gen3\Samples\Chat2\Lidgren.Message\bin\Debug\Lidgren.Network.xml
+D:\Projects\lidgren-network-gen3-2013-05-07\Lidgren-network-gen3\Samples\Chat2\Lidgren.Message\obj\Debug\Lidgren.Message.csprojResolveAssemblyReference.cache
+D:\Projects\lidgren-network-gen3-2013-05-07\Lidgren-network-gen3\Samples\Chat2\Lidgren.Message\obj\Debug\Lidgren.Message.dll
+D:\Projects\lidgren-network-gen3-2013-05-07\Lidgren-network-gen3\Samples\Chat2\Lidgren.Message\obj\Debug\Lidgren.Message.pdb

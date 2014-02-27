@@ -15,13 +15,12 @@ namespace Chat
         [STAThread]
         static void Main()
         {
-            Console.WriteLine("Application start...");
+            Console.WriteLine("Application start...[ThreadID:{0}]", Thread.CurrentThread.ManagedThreadId);
 
             string app_identifier = "chat";
             string server_ip = "127.0.0.1";
             int server_port = 11515;
             int max_client = 100;
-
 
             ChatClient client = new ChatClient();
             client.Init(app_identifier);

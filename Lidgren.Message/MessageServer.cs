@@ -7,6 +7,7 @@ using System.Threading;
 using System.ComponentModel;
 using System.Reflection;
 using Lidgren;
+using ManagedHelpers.Threads;
 
 namespace Lidgren.Message
 {
@@ -23,6 +24,7 @@ namespace Lidgren.Message
 
         int interval_ms = 0;
         public event Action OnTick;
+        Timer tick_timer = null;
 
         public MessageServer()
         {
@@ -50,7 +52,7 @@ namespace Lidgren.Message
         }
 
 
-        public void Init(string app_identifier, int listen_port, int max_connections, int interval_ms)
+        public void Init(string app_identifier, int listen_port, int max_connections, int interval_ms, bool use_multi_thread)
         {
             this.app_identifier = app_identifier;
             this.interval_ms = interval_ms;
@@ -60,18 +62,59 @@ namespace Lidgren.Message
             config.Port = listen_port;
 
             net_server = new NetServer(config);
-            net_worker = new BackgroundWorker();
-            net_worker.DoWork += new DoWorkEventHandler(net_worker_DoWork);
-            net_worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(net_worker_RunWorkerCompleted);
+
+            if (SynchronizationContext.Current == null)
+            {
+                SynchronizationContext.SetSynchronizationContext(new STASynchronizationContext());
+            }
+
+            if (use_multi_thread == false && SynchronizationContext.Current != null)
+            {
+                net_server.RegisterReceivedCallback(new SendOrPostCallback(GotMessage));
+            }
+            else
+            {
+                net_worker = new BackgroundWorker();
+                net_worker.DoWork += new DoWorkEventHandler(net_worker_DoWork);
+                net_worker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(net_worker_RunWorkerCompleted);
+            }
+
+            tick_timer = new Timer(e =>
+            {
+                try
+                {
+                    if (OnTick != null && use_multi_thread && SynchronizationContext.Current != null)
+                    {
+                        SynchronizationContext.Current.Post(x =>
+                        {
+                            OnTick();
+                        }, null);
+
+                    }
+                    else
+                    {
+                        OnTick();
+                    }
+                }
+                catch (System.Exception ex)
+                {
+                    Console.WriteLine("Tick timer exception = {0}", ex.Message);
+                }
+            });
         }
 
         
         public void Start()
         {
-            proxy_list.ForEach(e => { e.SetNetwork(net_server); }); 
-            
+            proxy_list.ForEach(e => { e.SetNetwork(net_server); });
+
+            Console.WriteLine("{0} server start...", this.app_identifier);
+
             net_server.Start();
-            net_worker.RunWorkerAsync();
+            if (net_worker != null)
+            {
+                net_worker.RunWorkerAsync();
+            }
         }
 
 
@@ -85,6 +128,10 @@ namespace Lidgren.Message
             {
                 is_running = false;
             }
+            if (net_worker != null)
+            {
+                net_worker.CancelAsync();
+            }
         }
 
 
@@ -94,54 +141,41 @@ namespace Lidgren.Message
             {
                 Thread.Sleep(1);
             }
+            net_server.Shutdown("bye");
+            Console.WriteLine("{0} server is stopped!", this.app_identifier);
+        }
+
+
+        void GotMessage(object peer)
+        {
+            try
+            {
+                NetIncomingMessage im;
+                while ((im = net_server.ReadMessage()) != null)
+                {
+                    if (im.MessageType == NetIncomingMessageType.Data)
+                        ProcessMessage(im);
+                    else
+                    {
+                        string text = "[SERVER]" + im.ReadString();
+                        Console.WriteLine(text);
+                    }
+                }
+            }
+            catch (System.Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         void net_worker_DoWork(object sender, DoWorkEventArgs e)
         {
-            Console.WriteLine("{0} server start...", this.app_identifier);
-
             is_running = true;
             is_done = false;
 
-            long last_tick = DateTime.Now.Ticks;
             while (is_running)
             {
-                try
-                {
-                    NetIncomingMessage im;
-                    while ((im = net_server.ReadMessage()) != null)
-                    {
-                        if (im.MessageType == NetIncomingMessageType.Data)
-                            ProcessMessage(im);
-                        else
-                        {
-                            string text = "[SERVER]" + im.ReadString();
-                            Console.WriteLine(text);
-                        }
-                    }
-                }
-                catch (System.Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
-
-                if (interval_ms > 0 && OnTick != null)
-                {
-                    long diff_ms = (DateTime.Now.Ticks - last_tick) / TimeSpan.TicksPerMillisecond;
-                    if (diff_ms >= interval_ms)
-                    {
-                        last_tick = DateTime.Now.Ticks;
-                        try
-                        {
-                            OnTick();
-                        }
-                        catch (System.Exception ex)
-                        {
-                            Console.WriteLine(ex.Message);
-                        }
-                    }
-                }
-
+                GotMessage(null);
                 Thread.Sleep(1);
             }
 
@@ -151,7 +185,6 @@ namespace Lidgren.Message
         
         void net_worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            Console.WriteLine("{0} server is stopped!", this.app_identifier);
             is_done = true;
         }
 
